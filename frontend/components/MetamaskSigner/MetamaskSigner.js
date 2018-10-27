@@ -15,6 +15,23 @@ class MetamaskSigner extends Component {
       port: 5001,
       protocol: "https"
     });
+
+    this.abi = [
+        {
+            "constant": false,
+            "inputs": [
+                {
+                    "name": "_ipfsHash",
+                    "type": "string"
+                }
+            ],
+            "name": "saveEth",
+            "outputs": [],
+            "payable": false,
+            "stateMutability": "nonpayable",
+            "type": "function"
+        }
+    ]
   }
 
   componentDidMount() {
@@ -70,11 +87,6 @@ class MetamaskSigner extends Component {
     const msgParams = [
       {
         type: "string",
-        name: "Claimed Address",
-        value: this.state.account
-      },
-      {
-        type: "string",
         name: "Title",
         value: this.state.title
       },
@@ -85,16 +97,16 @@ class MetamaskSigner extends Component {
       }
     ];
 
-    this.signMsg(msgParams, this.state.account).then(res => {
-      const msg = {
-        payload: msgParams,
-        signature: res
-      };
+    // this.signMsg(msgParams, this.state.account).then(res => {
+    //   const msg = {
+    //     payload: msgParams,
+    //     signature: res
+    //   };
 
-      this.ipfs.addJSON(msg, (err, result) => {
-        console.log(err, result);
-      });
-    });
+    //   this.ipfs.addJSON(msg, (err, result) => {
+    //     console.log(err, result);
+    //   });
+    // });
   }
 
   setDescription(e) {
